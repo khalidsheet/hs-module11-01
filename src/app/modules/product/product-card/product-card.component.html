@@ -1,0 +1,27 @@
+<div
+  class="product-item rounded-md transition-all border border-transparent hover:border-blue-200"
+>
+  <div
+    class="product-item__image flex justify-center p-4 bg-white rounded-t-md border border-gray-200 border-b-0"
+  >
+    <img
+      [src]="product.image"
+      [alt]="product.title"
+      class="h-32 bg-contain shadow-none"
+    />
+  </div>
+  <div class="bg-blue-50 p-4 rounded-b-md">
+    <div class="flex justify-between">
+      <div class="product-item__title font-bold" [title]="product.title">
+        {{ product.title | slice : 0 : 20 }}...
+      </div>
+      <div class="product-item__actions">
+        <app-button
+          text="Add to cart"
+          (onClick)="handleAddItemToCart(product)"
+        />
+      </div>
+    </div>
+    <div class="product-item__price">{{ product.price | currency }}</div>
+  </div>
+</div>

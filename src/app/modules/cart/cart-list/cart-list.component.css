@@ -1,0 +1,15 @@
+.cart {
+  height: calc(100vh - 100px);
+}
+
+.scrollable-items {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 100px);
+  min-height: calc(100vh - 170px);
+  max-height: calc(100vh - 170px);
+}
+
+.scrollable-items::-webkit-scrollbar {
+  display: none;
+}

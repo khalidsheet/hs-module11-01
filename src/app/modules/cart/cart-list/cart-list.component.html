@@ -1,0 +1,27 @@
+<div
+  class="flex-1 bg-blue-50 overflow-y-hidden rounded-md cart border border-blue-100 relative"
+>
+  <div
+    *ngIf="cartItems.length === 0"
+    class="flex flex-col h-full w-full items-center justify-center"
+  >
+    <p class="text-2xl font-bold">No items in cart</p>
+    <p class="text-lg text-gray-600">Add some items to cart</p>
+  </div>
+  <div else>
+    <div class="flex flex-col w-full">
+      <div class="flex-1 overflow-y-scroll scrollable-items">
+        <div class="flex flex-col gap-4 p-4">
+          <app-cart-list-item
+            *ngFor="let item of cartItems"
+            [item]="item"
+            (removeItem)="subQuantityOrRemoveFromCart(item)"
+          ></app-cart-list-item>
+        </div>
+      </div>
+      <div class="flex justify-between p-4">
+        <app-cart-total [cartItems]="cartItems" />
+      </div>
+    </div>
+  </div>
+</div>

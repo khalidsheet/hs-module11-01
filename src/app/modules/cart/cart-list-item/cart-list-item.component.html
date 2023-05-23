@@ -1,0 +1,26 @@
+<div class="bg-white rounded-md flex relative">
+  <div class="p-2 bg-contain">
+    <img
+      [src]="item.product.image"
+      alt=""
+      class="w-16 max-h-16 bg-auto aspect-square"
+    />
+  </div>
+  <div class="flex-1 py-2 px-4">
+    <div class="text-lg font-bold">
+      {{ item.product.title | slice : 0 : 20 }}
+    </div>
+    <div class="text-sm text-gray-600 flex justify-between">
+      <span>x{{ item.quantity }}</span>
+      <span>{{ item.product.price | currency }}</span>
+      <span>{{ item.totalPrice | currency }}</span>
+    </div>
+  </div>
+  <div class="absolute -right-2 -top-2">
+    <app-button
+      [text]="item.quantity > 1 ? '-' : 'X'"
+      [isDanger]="true"
+      (onClick)="subQty()"
+    />
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="search-input w-96">
+  <input
+    type="text"
+    class="border border-gray-300 rounded-md p-2 w-full"
+    placeholder="Search for products"
+    (input)="handleSearch($event)"
+    (blur)="handleBlur()"
+  />
+  <p *ngIf="hasError" class="text-red-400">
+    {{ errorContent }}
+  </p>
+</div>

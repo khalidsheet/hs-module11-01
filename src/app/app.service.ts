@@ -95,6 +95,10 @@ export class AppService {
     );
   }
 
+  getCartTotal(): number {
+    return this.cartItems.reduce((total, item) => total + item.totalPrice, 0);
+  }
+
   clearCart(): void {
     this.cartItems = [];
   }

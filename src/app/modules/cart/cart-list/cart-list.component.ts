@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { Cart } from 'src/app/interfaces/cart';
@@ -12,10 +13,14 @@ export class CartListComponent implements OnInit, OnDestroy {
   cartItems: Cart[] = [];
   subscriptions$: Subscription[] = [];
 
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService, private router: Router) {}
 
   ngOnInit() {
     this.getCartItems();
+  }
+
+  checkout() {
+    this.router.navigate(['/checkout']);
   }
 
   getCartItems() {

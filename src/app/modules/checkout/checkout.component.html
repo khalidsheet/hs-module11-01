@@ -1,0 +1,40 @@
+<div class="flex flex-col gap-6 p-12 bg-blue-50 h-screen">
+  <h1 class="text-4xl font-bold">Checkout</h1>
+  <div class="flex justify-between gap-x-6">
+    <div class="form w-8/12 rounded-lg p-4 bg-white min-h-max drop-shadow-md">
+      <div class="title">Please enter your personal details.</div>
+    </div>
+    <div
+      class="items w-4/12 flex flex-col relative bg-blue-600 rounded-lg p-4 h-[70vh] drop-shadow-md"
+    >
+      <div
+        *ngFor="let item of cartItems"
+        class="bg-white rounded-md flex relative mb-4"
+      >
+        <div class="p-2 bg-contain">
+          <img
+            [src]="item.product.image"
+            alt=""
+            class="w-16 max-h-16 bg-auto aspect-square"
+          />
+        </div>
+        <div class="flex-1 py-2 px-4">
+          <div class="text-lg font-bold">
+            {{ item.product.title | slice : 0 : 20 }}
+          </div>
+          <div class="text-sm text-gray-600 flex justify-between">
+            <span>x{{ item.quantity }}</span>
+            <span>{{ item.product.price | currency }}</span>
+            <span>{{ item.totalPrice | currency }}</span>
+          </div>
+        </div>
+      </div>
+      <a
+        class="flex-1 absolute bottom-4 bg-white w-11/12 left-4 h-12 rounded-md drop-shadow-sm flex justify-center items-center hover:bg-gray-100 transition-colors cursor-pointer hover:text-blue-600"
+        routerLink="/"
+      >
+        Continue Shopping
+      </a>
+    </div>
+  </div>
+</div>

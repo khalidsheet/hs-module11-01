@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from './interfaces/product';
 import { AppService } from './app.service';
+import { NavItem } from './interfaces/navItem';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +14,31 @@ export class AppComponent implements OnDestroy, OnInit {
 
   subscribable$: Subscription[] = [];
   products: Product[] = [];
+  selectedCategory: NavItem = {
+    category: 'All',
+    isActive: true,
+  };
 
   ngOnInit() {
+    this.getSelectedCategory();
     this.getProducts();
   }
 
-  getProducts() {
+  getSelectedCategory() {
     this.subscribable$.push(
-      this.appService.getProducts().subscribe((products) => {
-        this.products = products;
+      this.appService.getCategorySubject().subscribe((category) => {
+        this.getProducts(category);
       })
+    );
+  }
+
+  getProducts(category?: NavItem) {
+    this.subscribable$.push(
+      this.appService
+        .filterProductsByCategory(category ?? this.selectedCategory)
+        .subscribe((products) => {
+          this.products = products;
+        })
     );
   }
 

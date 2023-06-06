@@ -1,25 +1,9 @@
 .product-grid {
   overflow-y: scroll;
   overflow-x: hidden;
-  height: calc(100vh - 100px);
-}
-
-.product-grid::-webkit-scrollbar-track {
-  @apply bg-blue-100;
-  border-radius: 1rem;
-  padding-left: 10px;
-}
-
-.product-grid::-webkit-scrollbar-thumb {
-  @apply bg-blue-500;
-  border-radius: 1rem;
-  padding-left: 10px;
-  scroll-padding: 10px;
+  height: calc(100vh - 240px);
 }
 
 .product-grid::-webkit-scrollbar {
-  width: 0.5em;
   display: none;
-  height: 0.5em;
-  padding-left: 10px;
 }

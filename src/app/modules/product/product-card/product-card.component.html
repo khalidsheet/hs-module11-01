@@ -12,9 +12,11 @@
   </div>
   <div class="bg-blue-50 p-4 rounded-b-md">
     <div class="flex justify-between">
-      <div class="product-item__title font-bold" [title]="product.title">
-        {{ product.title | slice : 0 : 20 }}...
-      </div>
+      <div
+        class="product-item__title font-bold min-h-[70px] max-w-[250px]"
+        [title]="product.title"
+        [innerHTML]="product.title | highlighter : searchKeywords"
+      ></div>
       <div class="product-item__actions">
         <app-button
           text="Add to cart"

@@ -1,6 +1,12 @@
-<div class="product-grid grid grid-cols-3 gap-6 overflow-scroll">
-  <app-product-card
-    *ngFor="let product of products"
-    [product]="product"
-  ></app-product-card>
+<div class="product-grid">
+  <div class="grid grid-cols-3 gap-x-6 gap-y-6">
+    <app-product-card
+      *ngFor="let product of paginatedProducts"
+      [product]="product"
+    ></app-product-card>
+  </div>
 </div>
+<app-product-pagination
+  [totalProducts]="products.length"
+  (onPageChange)="handlePageChange($event)"
+></app-product-pagination>

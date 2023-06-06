@@ -1,0 +1,25 @@
+<div class="paginator flex gap-3 mt-12">
+  <button
+    class="page"
+    [disabled]="currentPage === 1"
+    (click)="handlePageChange(1)"
+  >
+    First
+  </button>
+  <button
+    class="page"
+    [class.selected]="currentPage === page"
+    *ngFor="let page of totalPages"
+    (click)="handlePageChange(page)"
+  >
+    {{ page }}
+  </button>
+
+  <button
+    class="page"
+    (click)="handlePageChange(totalPages.length)"
+    [disabled]="currentPage === totalPages.length"
+  >
+    Last
+  </button>
+</div>

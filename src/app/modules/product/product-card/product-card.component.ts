@@ -1,7 +1,7 @@
+import { Subscription } from 'rxjs';
 import { Component, Input } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Product } from 'src/app/interfaces/product';
-import { UtilsService } from 'src/app/utils.service';
 
 @Component({
   selector: 'app-product-card',
@@ -10,19 +10,25 @@ import { UtilsService } from 'src/app/utils.service';
 })
 export class ProductCardComponent {
   @Input() product: Product = {} as Product;
+  searchKeywords = '';
+  subscription: Subscription = new Subscription();
 
-  constructor(
-    private appService: AppService,
-    private utilService: UtilsService
-  ) {}
+  constructor(private appService: AppService) {}
+
+  ngOnInit() {
+    this.subscription = this.appService
+      .getSearchSubject()
+      .subscribe((query) => {
+        this.searchKeywords = query;
+        console.log(this.searchKeywords);
+      });
+  }
 
   handleAddItemToCart(product: Product) {
-    console.log('Add item to cart', product);
-    this.appService.addToCart({
-      product,
-      quantity: 1,
-      totalPrice: product.price,
-      id: this.utilService.generateId(),
-    });
+    this.appService.addToCart(product);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

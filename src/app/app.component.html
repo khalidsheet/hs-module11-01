@@ -2,6 +2,10 @@
   <div class="p-4 flex justify-between gap-6">
     <div class="catalog-items flex-1 w-9/12">
       <h2 class="text-3xl mb-4">Product Catalouge</h2>
+      <div class="header-actions mb-3">
+        <app-tabbed-nav [products]="products"></app-tabbed-nav>
+        <app-search />
+      </div>
       <app-product-grid [products]="products"></app-product-grid>
     </div>
     <div class="catalog-items flex-2 w-3/12">

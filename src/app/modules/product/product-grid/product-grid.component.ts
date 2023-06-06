@@ -1,6 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Inject } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
 import { PageChangeEvent } from '../product-pagination/product-pagination.component';
+import {
+  APP_SETTINGS,
+  APP_SETTINGS_TOKEN,
+  appSettings,
+} from 'src/app/app.settings';
 
 @Component({
   selector: 'app-product-grid',
@@ -11,10 +16,10 @@ export class ProductGridComponent implements OnChanges {
   @Input() products: Product[] = [];
   paginatedProducts: Product[] = [];
 
-  constructor() {}
+  constructor(@Inject(APP_SETTINGS_TOKEN) appSettings: APP_SETTINGS) {}
 
   ngOnChanges() {
-    this.handlePageChange({ page: 1, pageSize: 6 });
+    this.handlePageChange({ page: 1, pageSize: appSettings.pageSize });
   }
 
   handlePageChange(event: PageChangeEvent) {

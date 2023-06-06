@@ -7,6 +7,8 @@ import { AppService } from './app.service';
 import { CartModule } from './modules/cart/cart.module';
 import { ProductModule } from './modules/product/product.module';
 import { SharedModule } from './shared/shared.module';
+import { APP_SETTINGS_TOKEN, appSettings } from './app.settings';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +18,15 @@ import { SharedModule } from './shared/shared.module';
     CartModule,
     ProductModule,
     SharedModule,
+    HttpClientModule,
   ],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_SETTINGS_TOKEN,
+      useValue: appSettings,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

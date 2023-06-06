@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from './interfaces/product';
 import { AppService } from './app.service';
@@ -14,6 +20,7 @@ export class AppComponent implements OnDestroy, OnInit {
 
   subscribable$: Subscription[] = [];
   products: Product[] = [];
+  productCategories: Product[] = [];
   selectedCategory: NavItem = {
     category: 'All',
     isActive: true,
@@ -22,6 +29,12 @@ export class AppComponent implements OnDestroy, OnInit {
   ngOnInit() {
     this.getSelectedCategory();
     this.getProducts();
+
+    this.subscribable$.push(
+      this.appService.products$.subscribe((products) => {
+        this.productCategories = products;
+      })
+    );
   }
 
   getSelectedCategory() {
@@ -33,11 +46,13 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   getProducts(category?: NavItem) {
+    console.log(category);
     this.subscribable$.push(
       this.appService
         .filterProductsByCategory(category ?? this.selectedCategory)
         .subscribe((products) => {
           this.products = products;
+          console.log(products);
         })
     );
   }

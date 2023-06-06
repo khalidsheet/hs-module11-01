@@ -1,5 +1,4 @@
-import { Injectable } from '@angular/core';
-import products from '../assets/products.json';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { Product } from './interfaces/product';
@@ -7,6 +6,9 @@ import { Cart } from './interfaces/cart';
 import { generateId } from './utils';
 import { Subject } from 'rxjs/internal/Subject';
 import { NavItem } from './interfaces/navItem';
+import { HttpClient } from '@angular/common/http';
+import { APP_SETTINGS, APP_SETTINGS_TOKEN, appSettings } from './app.settings';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,17 +17,17 @@ export class AppService {
   private cartItems: Cart[] = [];
   private searchSubject = new Subject<string>();
   private categorySubject = new Subject<NavItem>();
-  private products: Product[] = [];
+  private filteredProducts: Product[] = [];
 
-  constructor() {}
+  constructor(
+    private httpClient: HttpClient,
 
-  getProducts(): Observable<Product[]> {
-    this.products = products;
-    return of<Product[]>(products);
-  }
+    @Inject(APP_SETTINGS_TOKEN)
+    public appSettings: APP_SETTINGS
+  ) {}
 
-  getProduct(id: number): Observable<Product> {
-    return of<Product>(<Product>products.find((product) => product.id === id));
+  get products$(): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(appSettings.dataSourceURL);
   }
 
   getCartItems(): Observable<Cart[]> {
@@ -83,26 +85,14 @@ export class AppService {
 
   filterProductsByCategory(category: NavItem): Observable<Product[]> {
     if (category.category === 'All') {
-      return this.getProducts();
+      return this.products$;
     }
 
-    this.getProducts();
-
-    const filteredProducts = this.products.filter(
-      (product) => product.category === category.category
+    return this.products$.pipe(
+      map((products) =>
+        products.filter((product) => product.category === category.category)
+      )
     );
-
-    this.products = filteredProducts;
-
-    return of<Product[]>(filteredProducts);
-  }
-
-  onPageChange(page: number, pageSize: number): Observable<Product[]> {
-    const start = (page - 1) * pageSize;
-    const end = start + pageSize;
-    const results = this.products.slice(start, end);
-    this.products = results;
-    return of<Product[]>(results);
   }
 
   clearCart(): void {

@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { APP_SETTINGS, APP_SETTINGS_TOKEN } from './../../../app.settings';
+import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 
 export interface PageChangeEvent {
   page: number;
@@ -15,13 +16,17 @@ export class ProductPaginationComponent {
   totalProducts = 0;
 
   @Input()
-  pageSize = 6;
+  pageSize = 0;
 
   currentPage = 1;
 
   @Output()
   onPageChange: EventEmitter<PageChangeEvent> =
     new EventEmitter<PageChangeEvent>();
+
+  constructor(@Inject(APP_SETTINGS_TOKEN) appSettings: APP_SETTINGS) {
+    this.pageSize = appSettings.pageSize;
+  }
 
   get totalPages(): number[] {
     const pages = Math.ceil(this.totalProducts / this.pageSize);

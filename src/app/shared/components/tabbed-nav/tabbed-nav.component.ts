@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { NavItem } from 'src/app/interfaces/navItem';
 import { Product } from 'src/app/interfaces/product';
@@ -8,13 +8,17 @@ import { Product } from 'src/app/interfaces/product';
   templateUrl: './tabbed-nav.component.html',
   styleUrls: ['./tabbed-nav.component.css'],
 })
-export class TabbedNavComponent implements OnInit {
+export class TabbedNavComponent implements OnInit, OnChanges {
   @Input() products: Product[] = [];
   navItems: NavItem[] = [];
 
   constructor(private appService: AppService) {}
 
   ngOnInit() {
+    this.displayNavItems();
+  }
+
+  ngOnChanges() {
     this.displayNavItems();
   }
 

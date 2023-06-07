@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/app.service';
+import { CheckoutService } from '../checkout.service';
+import { Cart } from 'src/app/interfaces/cart';
 
 @Component({
   selector: 'app-checkout-form',
@@ -24,17 +26,31 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
     ]),
   });
   subscription: Subscription[] = [];
+  cartItems: Cart[] = [];
 
-  constructor(private appService: AppService, private router: Router) {}
+  constructor(
+    private appService: AppService,
+    private checkoutService: CheckoutService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.formValuesChanges();
+    this.getCartItems();
   }
 
   onSubmit(): void {}
 
   get totalCheckoutPrice(): number {
     return this.appService.getCartTotal();
+  }
+
+  getCartItems(): void {
+    this.subscription.push(
+      this.appService
+        .getCartItems()
+        .subscribe((cartItems) => (this.cartItems = cartItems))
+    );
   }
 
   hasFormControlError(formControlName: string) {
@@ -69,7 +85,24 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   }
 
   finishCheckout() {
-    this.router.navigate(['/checkout/thank-you']);
+    if (this.formGroup.valid) {
+      this.checkoutService
+        .checkout({
+          name:
+            this.formGroup.controls['firstName'].value +
+            ' ' +
+            this.formGroup.controls['lastName'].value,
+          email: this.formGroup.controls['email'].value,
+          cart: this.cartItems,
+        })
+        .subscribe(() => {
+          this.appService.clearCart();
+          this.router.navigate(['/checkout/thank-you']);
+        });
+      return;
+    }
+
+    this.formGroup.markAllAsTouched();
   }
 
   ngOnDestroy(): void {

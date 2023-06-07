@@ -1,0 +1,145 @@
+<div>
+  <div class="title">Please enter your personal details.</div>
+  <div class="form">
+    <form [formGroup]="formGroup" (submit)="finishCheckout()">
+      <div class="form-group">
+        <div class="input-group">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            placeholder="Enter your first name"
+            [class.error]="hasFormControlError('firstName')"
+          />
+          <span class="help-text" *ngIf="hasFormControlError('firstName')">
+            Please enter your first name.
+          </span>
+        </div>
+        <div class="input-group">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            placeholder="Enter your last name"
+            [class.error]="hasFormControlError('lastName')"
+          />
+          <span class="help-text" *ngIf="hasFormControlError('lastName')">
+            Please enter your last name.
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            placeholder="Enter your first name"
+            [class.error]="hasFormControlError('email')"
+          />
+          <span class="help-text" *ngIf="hasFormControlError('email')">
+            Please enter your last name.
+          </span>
+        </div>
+        <div class="input-group">
+          <label for="lastName">Country</label>
+          <select
+            type="text"
+            id="country"
+            formControlName="country"
+            [class.error]="hasFormControlError('country')"
+          >
+            <option value="" selected disabled>Select Country</option>
+            <option value="spain">Spain</option>
+            <option value="iraq">Iraq</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+          </select>
+          <span class="help-text" *ngIf="hasFormControlError('country')">
+            Please select your country.
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group full">
+          <label for="address">Address</label>
+          <input
+            type="text"
+            id="address"
+            formControlName="address"
+            placeholder="Enter your address"
+            [class.error]="hasFormControlError('address')"
+          />
+          <span class="help-text" *ngIf="hasFormControlError('address')">
+            Please enter your address.
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <label for="zipCode">ZIP Code</label>
+          <input
+            type="text"
+            id="zipCode"
+            formControlName="zipCode"
+            placeholder="Enter your zip code"
+            [class.error]="hasFormControlError('zipCode')"
+          />
+          <span class="help-text" *ngIf="hasFormControlError('zipCode')">
+            Please enter your address.
+          </span>
+        </div>
+        <div class="input-group">
+          <label for="state">State</label>
+          <input
+            type="text"
+            id="state"
+            formControlName="state"
+            placeholder="Enter your state"
+            [class.error]="hasFormControlError('state')"
+          />
+          <span class="help-text" *ngIf="hasFormControlError('state')">
+            Please enter your address.
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group inline">
+          <input
+            type="checkbox"
+            id="terms"
+            formControlName="terms"
+            placeholder="Enter your zip code"
+            class="checkbox"
+          />
+          <label for="terms">
+            I hereby accept the terms of use of this site.
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group mt-6 flex justify-end w-full">
+        <a
+          class="bg-slate-100 px-4 left-4 rounded-md flex justify-center items-center hover:bg-gray-100 transition-colors cursor-pointer hover:text-blue-600"
+          routerLink="/"
+        >
+          Continue Shopping
+        </a>
+        <button
+          class="checkout-button"
+          [disabled]="formGroup.invalid"
+          type="submit"
+        >
+          Finish Checkout ({{ totalCheckoutPrice | currency }})
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -12,16 +12,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CheckoutComponent implements OnDestroy, OnInit {
   cartItems: Cart[] = [];
   subscriptions: Subscription[] = [];
-  formGroup: FormGroup = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    country: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    zipCode: new FormControl('', [Validators.required]),
-    state: new FormControl('', [Validators.required]),
-    terms: new FormControl('', [Validators.required]),
-  });
 
   constructor(private appService: AppService) {}
 

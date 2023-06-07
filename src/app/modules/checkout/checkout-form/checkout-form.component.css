@@ -1,0 +1,61 @@
+.title {
+  @apply text-xl;
+}
+
+.form {
+  @apply flex flex-col mt-6;
+}
+
+.input-group {
+  @apply flex flex-col mt-3;
+}
+
+.input-group label {
+  @apply text-sm;
+}
+
+.input-group input[type="text"],
+.input-group select {
+  @apply py-2 px-3 rounded bg-slate-100 mt-3;
+}
+
+.form-group {
+  @apply flex gap-6;
+}
+
+.form-group .input-group {
+  @apply w-1/2;
+}
+
+.form-group .input-group.full {
+  @apply w-full;
+}
+
+.form-group .input-group.inline {
+  @apply w-auto flex-row items-center mt-6;
+}
+
+.checkbox {
+  @apply flex items-center mr-2;
+}
+
+.form-group button.checkout-button {
+  @apply py-2 px-3 rounded bg-blue-600 text-white;
+}
+
+.form-group button.checkout-button[disabled] {
+  @apply bg-gray-400 cursor-not-allowed;
+}
+
+.help-text {
+  @apply text-sm text-red-500 mt-2;
+}
+
+input.error,
+select.error {
+  @apply border border-red-500;
+}
+
+input::placeholder.error {
+  @apply text-red-500;
+}

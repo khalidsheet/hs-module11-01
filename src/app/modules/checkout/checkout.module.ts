@@ -5,9 +5,11 @@ import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CheckoutComponent } from './checkout.component';
 import { CartModule } from '../cart/cart.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckoutFormComponent } from './checkout-form/checkout-form.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 @NgModule({
-  declarations: [CheckoutComponent],
+  declarations: [CheckoutComponent, CheckoutFormComponent, ThankYouComponent],
   imports: [
     CommonModule,
     CheckoutRoutingModule,

@@ -6,3 +6,8 @@
 .highlighted-text {
   color: #f44336;
 }
+
+* {
+  font-family: "Montserrat", sans-serif;
+  outline: none;
+}

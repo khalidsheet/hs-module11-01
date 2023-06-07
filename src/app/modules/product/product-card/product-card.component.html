@@ -1,14 +1,20 @@
 <div
-  class="product-item rounded-md transition-all hover:border-blue-200 drop-shadow-sm"
+  class="product-item rounded-md transition-all hover:border-blue-200 drop-shadow-sm hover:drop-shadow-lg"
 >
   <div
-    class="product-item__image flex justify-center p-4 bg-white rounded-t-md border border-gray-100 border-b-0"
+    class="product-item__image relative flex justify-center p-4 bg-white rounded-t-md border border-gray-100 border-b-0"
   >
     <img
       [src]="product.image"
       [alt]="product.title"
       class="h-32 bg-contain shadow-none"
     />
+    <div
+      class="bg-white drop-shadow-sm text-yellow-500 absolute top-4 left-4 px-4 rounded-full flex justify-center items-center gap-x-1"
+    >
+      <i class="icofont-star"></i>
+      <span>{{ product.rating.rate }}</span>
+    </div>
   </div>
   <div class="bg-slate-50 p-4 rounded-b-md">
     <div class="flex justify-between">
@@ -21,7 +27,7 @@
       ></div>
       <div class="product-item__actions">
         <app-button
-          text="Add to cart"
+          text="<i class='icofont-shopping-cart'></i>"
           (onClick)="handleAddItemToCart(product)"
         />
       </div>

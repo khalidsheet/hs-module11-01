@@ -4,8 +4,16 @@
     [disabled]="currentPage === 1"
     (click)="handlePageChange(1)"
   >
-    First
+    <i class="icofont-rounded-double-left"></i>
   </button>
+  <button
+    class="page"
+    [disabled]="currentPage === 1"
+    (click)="handlePageChange(currentPage - 1)"
+  >
+    <i class="icofont-rounded-left"></i>
+  </button>
+
   <button
     class="page"
     [class.selected]="currentPage === page"
@@ -17,9 +25,17 @@
 
   <button
     class="page"
+    (click)="handlePageChange(currentPage + 1)"
+    [disabled]="currentPage === totalPages.length"
+  >
+    <i class="icofont-rounded-right"></i>
+  </button>
+
+  <button
+    class="page"
     (click)="handlePageChange(totalPages.length)"
     [disabled]="currentPage === totalPages.length"
   >
-    Last
+    <i class="icofont-rounded-double-right"></i>
   </button>
 </div>

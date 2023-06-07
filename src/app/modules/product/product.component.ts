@@ -19,6 +19,7 @@ export class ProductComponent {
     category: 'All',
     isActive: true,
   };
+  isLoading = true;
 
   ngOnInit() {
     this.getSelectedCategory();
@@ -40,11 +41,19 @@ export class ProductComponent {
   }
 
   getProducts(category?: NavItem) {
+    this.isLoading = true;
     this.subscribable$.push(
       this.appService
         .filterProductsByCategory(category ?? this.selectedCategory)
-        .subscribe((products) => {
-          this.products = products;
+        .subscribe({
+          next: (products) => {
+            this.products = products;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.log(err);
+            this.isLoading = false;
+          },
         })
     );
   }

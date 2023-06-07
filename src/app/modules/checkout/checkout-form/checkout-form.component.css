@@ -59,3 +59,22 @@ select.error {
 input::placeholder.error {
   @apply text-red-500;
 }
+
+.animate-loading {
+  @apply absolute top-0 -left-10 transition-all duration-200;
+  animation: loadingAnimation 2s linear infinite;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    @apply -left-10 opacity-25;
+  }
+
+  50% {
+    @apply opacity-100;
+  }
+
+  100% {
+    @apply left-full opacity-0;
+  }
+}

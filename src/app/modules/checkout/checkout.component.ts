@@ -2,7 +2,6 @@ import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AppService } from 'src/app/app.service';
 import { Cart } from 'src/app/interfaces/cart';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkout',

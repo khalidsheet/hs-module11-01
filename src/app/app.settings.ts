@@ -7,7 +7,7 @@ export interface APP_SETTINGS {
 }
 
 export const appSettings: APP_SETTINGS = {
-  dataSourceURL: '../assets/products.json',
+  dataSourceURL: 'https://fakestoreapi.com/products',
   pageSize: 6,
   language: 'en',
 };

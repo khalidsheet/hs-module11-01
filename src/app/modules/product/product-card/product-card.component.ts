@@ -20,7 +20,6 @@ export class ProductCardComponent {
       .getSearchSubject()
       .subscribe((query) => {
         this.searchKeywords = query;
-        console.log(this.searchKeywords);
       });
   }
 

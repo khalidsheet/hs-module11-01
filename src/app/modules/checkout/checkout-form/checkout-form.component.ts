@@ -57,7 +57,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
             onlySelf: true,
           });
           this.formGroup.controls['state'].markAsTouched();
-          console.log('state becomes required');
         } else {
           this.formGroup.controls['state'].clearValidators();
           this.formGroup.controls['state'].updateValueAndValidity({
@@ -71,7 +70,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   finishCheckout() {
     this.router.navigate(['/checkout/thank-you']);
-    console.log(this.formGroup.value);
   }
 
   ngOnDestroy(): void {

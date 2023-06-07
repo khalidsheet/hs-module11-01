@@ -40,13 +40,11 @@ export class ProductComponent {
   }
 
   getProducts(category?: NavItem) {
-    console.log(category);
     this.subscribable$.push(
       this.appService
         .filterProductsByCategory(category ?? this.selectedCategory)
         .subscribe((products) => {
           this.products = products;
-          console.log(products);
         })
     );
   }

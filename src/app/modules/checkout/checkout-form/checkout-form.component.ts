@@ -27,6 +27,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
   });
   subscription: Subscription[] = [];
   cartItems: Cart[] = [];
+  isLoading = false;
 
   constructor(
     private appService: AppService,
@@ -86,6 +87,7 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
 
   finishCheckout() {
     if (this.formGroup.valid) {
+      this.isLoading = true;
       this.checkoutService
         .checkout({
           name:
@@ -95,9 +97,16 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
           email: this.formGroup.controls['email'].value,
           cart: this.cartItems,
         })
-        .subscribe(() => {
-          this.appService.clearCart();
-          this.router.navigate(['/checkout/thank-you']);
+        .subscribe({
+          next: (res) => {
+            this.appService.clearCart();
+            this.router.navigate(['/checkout/thank-you']);
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.log(err);
+            this.isLoading = false;
+          },
         });
       return;
     }

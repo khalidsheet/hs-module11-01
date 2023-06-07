@@ -136,8 +136,17 @@
           class="checkout-button"
           [disabled]="formGroup.invalid"
           type="submit"
+          *ngIf="!isLoading"
         >
           Finish Checkout ({{ totalCheckoutPrice | currency }})
+        </button>
+        <button
+          *ngIf="isLoading"
+          class="checkout-button w-36 h-10 relative overflow-hidden"
+        >
+          <i
+            class="icofont-truck-loaded text-4xl animate-loading animate-pulse"
+          ></i>
         </button>
       </div>
     </form>

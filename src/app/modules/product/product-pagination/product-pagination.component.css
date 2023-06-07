@@ -1,9 +1,9 @@
 .page {
-  @apply w-12 h-12 bg-gray-500 items-center justify-center flex text-lg text-white rounded-md cursor-pointer;
+  @apply w-12 h-12 text-black items-center justify-center flex text-lg rounded-full cursor-pointer transition-all;
 }
 
 .page:hover {
-  @apply bg-gray-600;
+  @apply bg-blue-100 text-blue-600;
 }
 
 .page[disabled] {
@@ -11,5 +11,5 @@
 }
 
 .selected {
-  @apply bg-blue-600;
+  @apply bg-blue-600 text-white;
 }

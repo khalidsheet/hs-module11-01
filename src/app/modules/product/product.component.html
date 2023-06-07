@@ -5,7 +5,17 @@
       <app-tabbed-nav [products]="productCategories"></app-tabbed-nav>
       <app-search />
     </div>
-    <app-product-grid [products]="products"></app-product-grid>
+    <div
+      *ngIf="isLoading; else elseTemplate"
+      class="flex h-96 w-full items-center justify-center"
+    >
+      <div class="loader">
+        <div class="loader-inner"></div>
+      </div>
+    </div>
+    <ng-template #elseTemplate>
+      <app-product-grid [products]="products"></app-product-grid>
+    </ng-template>
   </div>
   <div class="catalog-items flex-2 w-3/12">
     <h2 class="text-3xl mb-4">Cart</h2>

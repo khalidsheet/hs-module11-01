@@ -3,6 +3,5 @@
   class="button"
   [class.primary]="!isDanger"
   [class.danger]="isDanger"
->
-  {{ text }}
-</button>
+  [innerHTML]="text"
+></button>

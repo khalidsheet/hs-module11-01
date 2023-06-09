@@ -99,7 +99,6 @@ export class CheckoutFormComponent implements OnInit, OnDestroy {
         })
         .subscribe({
           next: (res) => {
-            this.appService.clearCart();
             this.router.navigate(['/checkout/thank-you']);
             this.isLoading = false;
           },

@@ -14,6 +14,9 @@ const routes: Routes = [
     path: 'thank-you',
     component: ThankYouComponent,
     canActivate: [checkoutGuard],
+    data: {
+      animation: 'thankYouAnimation',
+    },
   },
 ];
 

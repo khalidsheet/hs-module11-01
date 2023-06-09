@@ -6,6 +6,9 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('./modules/product/product.module').then((m) => m.ProductModule),
+    data: {
+      animation: 'fadeAnimation',
+    },
   },
   {
     path: 'checkout',
@@ -13,6 +16,9 @@ const routes: Routes = [
       import('./modules/checkout/checkout.module').then(
         (m) => m.CheckoutModule
       ),
+    data: {
+      animation: 'checkoutAnimation',
+    },
   },
 ];
 
